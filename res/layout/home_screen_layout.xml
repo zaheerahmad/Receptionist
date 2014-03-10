@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/background_f"
+            android:paddingBottom="15dip" >
+
+            <ImageView
+                android:id="@+id/numberDays"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/how_did_we_do" />
+
+            <ImageView
+                android:id="@+id/daysText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/leave_a_review_here" >
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_f"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingTop="15dip" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:scaleType="fitStart"
+                android:src="@drawable/left_of_get_started" />
+
+            <ImageView
+                android:id="@+id/home_screen_getStarted_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                android:src="@drawable/get_started" >
+            </ImageView>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:scaleType="fitEnd"
+                android:src="@drawable/right_of_get_started" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
