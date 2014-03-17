@@ -26,7 +26,7 @@
             android:screenOrientation="landscape"
             android:stateNotNeeded="true"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustPan">
+            android:windowSoftInputMode="stateAlwaysVisible|adjustNothing">
         </activity>
         <activity
             android:name="com.sakhan.receptionist.Activity.HomeActivity"
@@ -34,13 +34,14 @@
             android:launchMode="singleInstance"
             android:screenOrientation="landscape"
             android:stateNotNeeded="true"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar" 
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
-                <!--
+               <!--  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 -->
@@ -76,5 +77,6 @@
             android:name="com.sakhan.receptionist.services.DataSendService"
             android:enabled="true" />
     </application>
+    
 
 </manifest>
