@@ -1,131 +1,125 @@
-<com.sakhan.receptionist.utils.VerticalScrollview xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_parent"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#ffffff" >
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_feedback" >
+
+    <View
+        android:id="@+id/anchor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/anchor"
         android:orientation="horizontal" >
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight=".7" >
+            android:layout_weight="1" >
+
+            <View
+                android:id="@+id/anchor_sidebar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true" />
+
+            <com.sakhan.receptionist.utils.SAutoBgButton
+                android:id="@+id/feedback_help_to_improve"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@id/anchor_sidebar"
+                android:background="@drawable/help_us_improve_img"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"/>
 
             <com.sakhan.receptionist.utils.SAutoBgButton
                 android:id="@+id/main_menu_cover_homeButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/home" />
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/anchor_sidebar"
+                android:background="@drawable/home"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginTop="5dp"
-            android:layout_weight="3"
-            tools:context=".FeedbackActivity" >
+            android:layout_weight="2" >
 
-            <LinearLayout
-                android:id="@+id/main_linear_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <View
+                android:id="@+id/anchor_sidebar_right_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true" />
 
-                <TableLayout
+            <EditText
+                android:id="@+id/et_feedback"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@id/anchor_sidebar_right_1"
+                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/top_edittext_bg"
+                android:gravity="top|left"
+                android:hint="Please Enter Your Comments Here"
+                android:maxLines="50"
+                android:paddingLeft="10dp"
+                android:scrollbars="vertical"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/anchor_sidebar_right_1">
+
+                <EditText
+                    android:id="@+id/et_userFName"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" >
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/top_edittext_bg"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:hint="Your Name"/>
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/et_cellNo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/et_userFName"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/top_edittext_bg"
+                    android:imeOptions="actionDone"
+                    android:numeric="integer"
+                    android:singleLine="true"
+                    android:paddingLeft="10dp"
+                    android:textSize="15sp"
+                    android:hint="Your Mobile Number"/>
+                
 
-                        <TextView
-                            android:id="@+id/tv_feedback"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Feedback"
-                            android:textColor="#000000"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/et_feedback"
-                            android:layout_width="260dip"
-                            android:layout_height="65dip"
-                            android:gravity="top|left"
-                            android:imeOptions="actionNext"
-                            android:maxLines="50"
-                            android:scrollbars="vertical"
-                            android:selectAllOnFocus="true"
-                            android:textSize="15sp" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            android:id="@+id/tv_userFName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Name"
-                            android:textColor="#000000"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/et_userFName"
-                            android:layout_width="260dip"
-                            android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:selectAllOnFocus="true"
-                            android:singleLine="true"
-                            android:textSize="15sp" />
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            android:id="@+id/tv_userCellNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Cell No."
-                            android:textColor="#000000"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/et_cellNo"
-                            android:layout_width="260dip"
-                            android:layout_height="wrap_content"
-                            android:imeOptions="actionDone"
-                            android:numeric="integer"
-                            android:singleLine="true"
-                            android:textSize="15sp" />
-                    </TableRow>
-                </TableLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            tools:context=".FeedbackActivity" >
-
-            <com.sakhan.receptionist.utils.SAutoBgButton
-                android:id="@+id/btn_feedbackSend"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:background="@drawable/send_btn_2"/>
+                <com.sakhan.receptionist.utils.SAutoBgButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/send_feedback"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/btn_sendFeedback"/>
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
-</com.sakhan.receptionist.utils.VerticalScrollview>
+</RelativeLayout>
