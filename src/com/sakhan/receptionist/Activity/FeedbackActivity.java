@@ -13,10 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -88,7 +85,7 @@ public class FeedbackActivity extends Activity
 			}
 		} );
 
-		sendButton = ( Button ) findViewById( R.id.btn_feedbackSend );
+		sendButton = ( Button ) findViewById( R.id.btn_sendFeedback );
 		sendButton.setOnClickListener( new View.OnClickListener()
 		{
 
@@ -98,7 +95,7 @@ public class FeedbackActivity extends Activity
 
 				// TODO Auto-generated method stub
 
-				if( Utils.isNullOrEmpty( textFName.getText().toString() ) || Utils.isNullOrEmpty( textFeedback.getText().toString() ) )
+				if( Utils.isNullOrEmpty( textFName.getText().toString() ) || Utils.isNullOrEmpty( textFeedback.getText().toString() ) || Utils.isNullOrEmpty( textPhoneNumber.getText().toString() ) )
 				{
 					Toast.makeText( getApplicationContext(), AppGlobal.TOAST_MISSING_MANDATORY_FIELDS, Toast.LENGTH_LONG ).show();
 				}
@@ -166,40 +163,6 @@ public class FeedbackActivity extends Activity
 		// TODO Auto-generated method stub
 		super.onPause();
 		// unregisterReceiver( internetConnectionFoundBroadCast );
-	}
-
-	public void setupUI( View view )
-	{
-
-		// Set up touch listener for non-text box views to hide keyboard.
-		if( !( view instanceof EditText ) )
-		{
-
-			view.setOnTouchListener( new OnTouchListener()
-			{
-
-				public boolean onTouch( View v, MotionEvent event )
-				{
-
-					Utils.hideSoftKeyboard( FeedbackActivity.this );
-					return false;
-				}
-
-			} );
-		}
-
-		// If a layout container, iterate over children and seed recursion.
-		if( view instanceof ViewGroup )
-		{
-
-			for( int i = 0 ; i < ( ( ViewGroup ) view ).getChildCount() ; i++ )
-			{
-
-				View innerView = ( ( ViewGroup ) view ).getChildAt( i );
-
-				setupUI( innerView );
-			}
-		}
 	}
 
 	public void clearFields()
