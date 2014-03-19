@@ -51,7 +51,7 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
+                android:layout_weight="5"
                 android:scaleType="fitStart"
                 android:src="@drawable/left_of_get_started" />
 
@@ -60,16 +60,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:scaleType="fitStart"
+                android:scaleType="fitXY"
                 android:src="@drawable/get_started" >
             </ImageView>
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:scaleType="fitEnd"
-                android:src="@drawable/right_of_get_started" />
+                android:layout_weight="5"
+                android:scaleType="fitStart"
+                android:src="@drawable/left_of_get_started" />
         </LinearLayout>
     </RelativeLayout>
 
