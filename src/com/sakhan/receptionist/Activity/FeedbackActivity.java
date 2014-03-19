@@ -73,17 +73,18 @@ public class FeedbackActivity extends Activity
 		textFeedback = ( EditText ) findViewById( R.id.et_feedback );
 
 		homeBtn = ( SAutoBgButton ) findViewById( R.id.main_menu_cover_homeButton );
-		homeBtn.setOnClickListener( new View.OnClickListener()
-		{
-			@Override
-			public void onClick( View v )
-			{
-
-				Intent intent = new Intent( getApplicationContext(), HomeActivity.class );
-				intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-				startActivity( intent );
-			}
-		} );
+		// homeBtn.setOnClickListener( new View.OnClickListener()
+		// {
+		// @Override
+		// public void onClick( View v )
+		// {
+		//
+		// Intent intent = new Intent( getApplicationContext(),
+		// HomeActivity.class );
+		// intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+		// startActivity( intent );
+		// }
+		// } );
 
 		sendButton = ( Button ) findViewById( R.id.btn_sendFeedback );
 		sendButton.setOnClickListener( new View.OnClickListener()
@@ -124,10 +125,12 @@ public class FeedbackActivity extends Activity
 
 					Toast.makeText( getApplicationContext(), AppGlobal.TOAST_THANKS_FOR_FEEDBACK, Toast.LENGTH_LONG ).show();
 
-					MainMenuActivity.listFeedback.add( feed );
+					if( MainMenuActivity.listFeedback != null && MainMenuActivity.listFeedback.size() > 0 )
+						MainMenuActivity.listFeedback.add( feed );
 					// MainMenuActivity.feedbackAdapter.notifyDataSetChanged();
 
-					FeedbackActivity.this.finish();
+					setResult( RESULT_OK );
+					finish();
 
 					Log.d( "Reading: ", "Reading all feedbacks.." );
 
