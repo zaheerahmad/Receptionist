@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.sakhan.receptionist.utils.VerticalScrollview xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_feedback" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_feedback" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -102,11 +102,8 @@
                     <com.sakhan.receptionist.utils.SAutoBgButton
                         android:id="@+id/btn_sendFeedback"
                         android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_above="@+id/anchor_sidebar_right_2"
+                        android:layout_height="110dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/send_feedback"
                         android:paddingLeft="10dp" />
 
