@@ -2,33 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/bg_feedback"
     android:baselineAligned="false"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="10dp" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2" >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#ffffff" />
+
+        <View
+            android:id="@+id/main_menu_cover_rightView1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/main_menu_cover_rightView1" >
 
             <com.sakhan.receptionist.utils.SAutoBgButton
+                android:id="@+id/main_menu_cover_FeedbackButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/feedback" />
+        </RelativeLayout>
+
+        <!--
+             <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            
+                 <com.sakhan.receptionist.utils.SAutoBgButton
                 android:id="@+id/main_menu_cover_homeButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/home" />
+           
 
-            <com.sakhan.receptionist.utils.SAutoBgButton
-                android:id="@+id/main_menu_cover_FeedbackButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/feedback" />
         </LinearLayout>
+        -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/main_menu_cover_rightView1"
+            android:padding="5dp" >
+
+            <View
+                android:id="@+id/main_menu_cover_rightView2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#ffffff" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_above="@id/main_menu_cover_rightView2"
+                android:scaleType="fitXY"
+                android:src="@drawable/copyright_text" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -40,7 +84,9 @@
             android:id="@+id/main_menu_cover_list_of_all_feedbacks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="6dp" />
+            android:padding="6dp"
+            android:dividerHeight="25.0sp"
+            android:divider="@android:color/transparent"/>
     </RelativeLayout>
 
 </LinearLayout>
