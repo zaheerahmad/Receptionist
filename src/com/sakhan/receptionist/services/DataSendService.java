@@ -14,6 +14,10 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.widget.Toast;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class DataSendService extends Service
 {
 	public static boolean	isServiceRunning	= false;
@@ -29,6 +33,9 @@ public class DataSendService extends Service
 			Toast.makeText( getApplicationContext(), "Service Started...", Toast.LENGTH_LONG ).show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
+	 */
 	@Override
 	public int onStartCommand( Intent intent, int flags, int startId )
 	{

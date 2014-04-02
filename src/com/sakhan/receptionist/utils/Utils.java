@@ -23,6 +23,10 @@ import android.view.inputmethod.InputMethodManager;
 import com.sakhan.receptionist.Alchemy.api.AlchemyAPI;
 import com.sakhan.receptionist.Alchemy.api.AlchemyAPI_NamedEntityParams;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class Utils
 {
 	public static void hideSoftKeyboard( Activity activity )

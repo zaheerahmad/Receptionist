@@ -1,5 +1,9 @@
 package com.sakhan.receptionist.wrapper;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public interface IAsyncTask
 {
 

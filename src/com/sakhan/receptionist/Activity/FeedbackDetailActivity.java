@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.sakhan.receptionist.utils.AppGlobal;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class FeedbackDetailActivity extends Activity
 {
 

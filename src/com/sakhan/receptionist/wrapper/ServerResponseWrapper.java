@@ -1,5 +1,9 @@
 package com.sakhan.receptionist.wrapper;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class ServerResponseWrapper
 {
 	int		code;

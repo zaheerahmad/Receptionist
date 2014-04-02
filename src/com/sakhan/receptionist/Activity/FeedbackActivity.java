@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,15 +24,20 @@ import com.sakhan.receptionist.utils.AppGlobal;
 import com.sakhan.receptionist.utils.SAutoBgButton;
 import com.sakhan.receptionist.utils.Utils;
 
+/**
+ * @author Zaheer Ahmad
+ * 
+ */
 public class FeedbackActivity extends Activity
 {
 
-	private Button			sendButton;
+	private SAutoBgButton	sendButton;
 	private EditText		textFName;
 	private EditText		textLName;
 	private EditText		textPhoneNumber;
 	private EditText		textFeedback;
-	private SAutoBgButton	homeBtn;
+
+	// private SAutoBgButton homeBtn;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -47,8 +51,11 @@ public class FeedbackActivity extends Activity
 		 * WindowManager.LayoutParams.FLAG_FULLSCREEN );
 		 */
 
-		Intent dataServiceIntent = new Intent( FeedbackActivity.this, DataSendService.class );
-		startService( dataServiceIntent );
+		/*
+		 * Intent dataServiceIntent = new Intent( FeedbackActivity.this,
+		 * DataSendService.class );
+		 * startService( dataServiceIntent );
+		 */
 
 		setContentView( R.layout.feedback );
 
@@ -72,7 +79,8 @@ public class FeedbackActivity extends Activity
 		textPhoneNumber = ( EditText ) findViewById( R.id.et_cellNo );
 		textFeedback = ( EditText ) findViewById( R.id.et_feedback );
 
-		homeBtn = ( SAutoBgButton ) findViewById( R.id.main_menu_cover_homeButton );
+		// homeBtn = ( SAutoBgButton ) findViewById(
+		// R.id.main_menu_cover_homeButton );
 		// homeBtn.setOnClickListener( new View.OnClickListener()
 		// {
 		// @Override
@@ -86,7 +94,7 @@ public class FeedbackActivity extends Activity
 		// }
 		// } );
 
-		sendButton = ( Button ) findViewById( R.id.btn_sendFeedback );
+		sendButton = ( SAutoBgButton ) findViewById( R.id.btn_sendFeedback );
 		sendButton.setOnClickListener( new View.OnClickListener()
 		{
 

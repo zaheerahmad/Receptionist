@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class HomeActivity extends Activity
 {
 

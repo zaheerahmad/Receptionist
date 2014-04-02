@@ -110,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
 		List<FeedbackBO> feedbackList = new ArrayList<FeedbackBO>();
 		// Select All Query
-		String selectQuery = "SELECT  * FROM " + AppGlobal.TABLE_FEEDBACK;
+		String selectQuery = "SELECT  * FROM " + AppGlobal.TABLE_FEEDBACK + " ORDER BY " + AppGlobal.FEEDBACK_ID + " DESC";
 
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery( selectQuery, null );

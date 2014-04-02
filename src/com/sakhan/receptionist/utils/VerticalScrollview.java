@@ -10,11 +10,14 @@ import android.view.MotionEvent;
 import android.widget.ScrollView;
 
 /**
- * @author Zaheer-laptop
+ * @author Zaheer Ahmad
  * 
  */
 public class VerticalScrollview extends ScrollView
 {
+	/**
+	 * @param context
+	 */
 	public VerticalScrollview( Context context )
 	{
 

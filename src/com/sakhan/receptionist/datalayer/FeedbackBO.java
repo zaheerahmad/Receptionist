@@ -1,6 +1,10 @@
 package com.sakhan.receptionist.datalayer;
 
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class FeedbackBO
 {
 	private int		feedbackId;

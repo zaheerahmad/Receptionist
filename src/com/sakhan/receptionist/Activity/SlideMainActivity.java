@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class SlideMainActivity extends Activity
 {
 	@Override

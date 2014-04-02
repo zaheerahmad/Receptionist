@@ -31,6 +31,10 @@ import com.sakhan.receptionist.wrapper.IAsyncTask;
 import com.sakhan.receptionist.wrapper.ResponseStatusWrapper;
 import com.sakhan.receptionist.wrapper.ServerResponseWrapper;
 
+/**
+ * @author Zaheer Ahmad
+ * 
+ */
 public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper>
 {
 
@@ -38,6 +42,10 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 	Context		context;
 	boolean		hasInternet	= false;
 
+	/**
+	 * @param asyncTask
+	 * @param context
+	 */
 	public DataFetcher( IAsyncTask asyncTask, Context context )
 	{
 
@@ -46,6 +54,10 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute()
 	{
@@ -66,6 +78,10 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 	static int		lastIndexS		= -1;
 	static boolean	isFileWritten	= false;
 
+	/*
+	 * (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
 	@Override
 	protected synchronized ResponseStatusWrapper doInBackground( String... params )
 	{
@@ -177,17 +193,18 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 							}
 						}
 
-						isFileWritten = true;
+						isFileWritten = false;
 
 						URL url = new URL( AppGlobal.SERVER_URL_SAVE_FEEDBACK );
 
 						HttpURLConnection httpUrlConnection = ( HttpURLConnection ) url.openConnection();
-						httpUrlConnection.setDoOutput( true );
-						httpUrlConnection.setDoInput( true );
 						httpUrlConnection.setRequestMethod( "POST" );
-						httpUrlConnection.setRequestProperty( "User-Agent", "GYUserAgentAndroid" );
 						httpUrlConnection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
+						//httpUrlConnection.setRequestProperty( "Content-Length", "" + Integer.toString( jsonParams.getBytes().length ) );
+						httpUrlConnection.setRequestProperty( "Content-Language", "en-US" );
 						httpUrlConnection.setUseCaches( false );
+						httpUrlConnection.setDoInput( true );
+						httpUrlConnection.setDoOutput( true );
 
 						DataOutputStream outputStream = new DataOutputStream( httpUrlConnection.getOutputStream() );
 
@@ -201,18 +218,24 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 						Reader reader = new InputStreamReader( responseStream );
 						ServerResponseWrapper serverResponse = gson.fromJson( reader, ServerResponseWrapper.class );
 
-						if( String.valueOf( serverResponse.getCode() ) == "200" )
+						if( serverResponse.getCode() == 1 )
 						{
 							ResponseStatusWrapper response = new ResponseStatusWrapper();
 
 							response.status = AppGlobal.RESPONSE_STATUS_SUCCESS;
 							response.message = AppGlobal.RESPONSE_STATUS_SUCCESS_MESSAGE;
 
-							if( isFileWritten )
-							{
-								prefs.edit().putInt( AppGlobal.APP_PREF_LAST_INSERTED_ID, lastInsertedFeed ).commit();
-								isFileWritten = false;
-							}
+							prefs.edit().putInt( AppGlobal.APP_PREF_LAST_INSERTED_ID, lastInsertedFeed ).commit();
+							isFileWritten = true;
+							/*
+							 * if( isFileWritten )
+							 * {
+							 * prefs.edit().putInt(
+							 * AppGlobal.APP_PREF_LAST_INSERTED_ID,
+							 * lastInsertedFeed ).commit();
+							 * isFileWritten = false;
+							 * }
+							 */
 							return response;
 						}
 						else
@@ -254,6 +277,10 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute( ResponseStatusWrapper response )
 	{

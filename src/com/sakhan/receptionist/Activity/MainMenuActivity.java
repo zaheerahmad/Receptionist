@@ -20,10 +20,14 @@ import com.sakhan.receptionist.utils.AppGlobal;
 import com.sakhan.receptionist.utils.ElipsizingTextView;
 import com.sakhan.receptionist.utils.SAutoBgButton;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class MainMenuActivity extends Activity
 {
 	SAutoBgButton						feedbackBtn;
-	SAutoBgButton						homeBtn;
+	//SAutoBgButton						homeBtn;
 
 	public static FeedbackListAdapter	feedbackAdapter;
 
@@ -49,8 +53,8 @@ public class MainMenuActivity extends Activity
 			}
 		} );
 
-		homeBtn = ( SAutoBgButton ) findViewById( R.id.main_menu_cover_homeButton );
-		homeBtn.setOnClickListener( new View.OnClickListener()
+		//homeBtn = ( SAutoBgButton ) findViewById( R.id.main_menu_cover_homeButton );
+		/*homeBtn.setOnClickListener( new View.OnClickListener()
 		{
 			@Override
 			public void onClick( View v )
@@ -58,7 +62,7 @@ public class MainMenuActivity extends Activity
 
 				MainMenuActivity.this.finish();
 			}
-		} );
+		} );*/
 
 		DatabaseHandler db = new DatabaseHandler( getApplicationContext(), AppGlobal.TABLE_FEEDBACK );
 		this.listFeedback = db.getAllFeedbacks();

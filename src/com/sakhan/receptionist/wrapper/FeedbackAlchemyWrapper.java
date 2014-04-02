@@ -2,6 +2,10 @@ package com.sakhan.receptionist.wrapper;
 
 import com.sakhan.receptionist.datalayer.FeedbackBO;
 
+/**
+ * @author Zaheer Ahmad
+ *
+ */
 public class FeedbackAlchemyWrapper
 {
 	FeedbackBO	feedback;
