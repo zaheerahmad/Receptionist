@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight=".75" >
+            android:layout_weight="1.1" >
 
             <View
                 android:id="@+id/anchor_sidebar"
@@ -23,12 +23,12 @@
 
             <com.sakhan.receptionist.utils.SAutoBgButton
                 android:id="@+id/feedback_help_to_improve"
-                android:layout_width="530dp"
-                android:layout_height="480dp"
+                android:layout_width="650dp"
+                android:layout_height="580dp"
                 android:layout_above="@id/anchor_sidebar"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="50dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/help_us_improve_img"
                 android:scaleType="fitXY" />
         </RelativeLayout>
@@ -48,7 +48,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_above="@id/anchor_sidebar_right_1"
-                android:paddingRight="80dp">
+                android:paddingRight="40dp">
 
                 <View
                     android:id="@+id/anchor_sidebar_right_3"
@@ -63,25 +63,26 @@
                     android:layout_above="@id/anchor_sidebar_right_3"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="45dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="100dp"
                     android:background="@drawable/top_edittext_bg"
                     android:gravity="top|left"
                     android:hint="Please Enter Your Comments Here"
-                    android:imeOptions="actionNext"
-                    android:inputType="textImeMultiLine"
-                    android:maxLines="50"
+                    android:maxLines ="4" 
+    				android:maxLength ="2000" 
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
+                    android:paddingRight="30dp"
                     android:scrollbars="vertical"
+                    android:singleLine="false"
                     android:textSize="35sp" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_below="@id/anchor_sidebar_right_3"
-                    android:layout_marginRight="35dp" >
+                    android:layout_marginRight="25dp" >
 
                     <EditText
                         android:id="@+id/et_userFName"
@@ -89,13 +90,13 @@
                         android:layout_height="55dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="35dp"
+                        android:layout_marginRight="125dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/top_edittext_bg"
                         android:hint="Your Name"
                         android:imeOptions="actionNext"
-                        android:paddingBottom="10dp"
                         android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
                         android:singleLine="true"
                         android:textSize="35sp" />
 
@@ -106,13 +107,13 @@
                         android:layout_below="@id/et_userFName"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="35dp"
+                        android:layout_marginRight="125dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/top_edittext_bg"
                         android:hint="Your Mobile Number"
                         android:imeOptions="actionDone"
                         android:inputType="number"
-                        android:paddingBottom="10dp"
+                        android:paddingTop="5dp"
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textSize="35sp" />
@@ -126,9 +127,11 @@
 
                 <com.sakhan.receptionist.utils.SAutoBgButton
                     android:id="@+id/btn_sendFeedback"
-                    android:layout_width="350dp"
-                    android:layout_height="400dp"
+                    android:layout_width="250dp"
+                    android:layout_height="230dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/send_feedback" />
             </RelativeLayout>
         </RelativeLayout>

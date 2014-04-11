@@ -71,7 +71,14 @@
                 android:layout_height="30dp"
                 android:layout_above="@id/main_menu_cover_rightView2"
                 android:scaleType="fitXY"
-                android:src="@drawable/copyright_text" />
+                android:src="@drawable/copyright_text"
+                android:id="@+id/main_menu_cover_copyright_text"/>      
+            <ImageView 
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_above="@id/main_menu_cover_copyright_text"
+                android:scaleType="fitXY"
+                android:src="@drawable/inbox"/>
         </RelativeLayout>
     </RelativeLayout>
 
