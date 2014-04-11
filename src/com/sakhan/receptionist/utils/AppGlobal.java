@@ -2,7 +2,7 @@ package com.sakhan.receptionist.utils;
 
 /**
  * @author Zaheer Ahmad
- *
+ * 
  */
 public class AppGlobal
 {
@@ -98,5 +98,6 @@ public class AppGlobal
 	public static final String	APP_PREF_IS_DATA_DIRTY								= "_isDataDirty_";
 	public static final String	APP_PREF_LAST_INSERTED_ID							= "_lastInsertedId_";
 	public static final String	APP_PREF_NAME										= "RECEPTIONIST_APP_PREFS";
+	public static final String	APP_PREF_TIMER										= "timer";
 
 }

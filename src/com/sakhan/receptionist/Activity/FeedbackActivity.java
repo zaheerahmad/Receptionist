@@ -12,9 +12,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sakhan.receptionist.datalayer.DatabaseHandler;
@@ -36,6 +40,10 @@ public class FeedbackActivity extends Activity
 	private EditText		textLName;
 	private EditText		textPhoneNumber;
 	private EditText		textFeedback;
+	private RelativeLayout	relativeLayout;
+	private long			timer	= 60000;
+	CountDownTimer			cDT;
+	DatabaseHandler			db;
 
 	// private SAutoBgButton homeBtn;
 
@@ -43,8 +51,30 @@ public class FeedbackActivity extends Activity
 	protected void onCreate( Bundle savedInstanceState )
 	{
 
-		super.onCreate( savedInstanceState );
+		db = new DatabaseHandler( FeedbackActivity.this, AppGlobal.TABLE_FEEDBACK );
 
+		cDT = new CountDownTimer( timer, 1000 )
+		{
+
+			@Override
+			public void onFinish()
+			{
+
+				finish();
+			}
+
+			@Override
+			public void onTick( long arg0 )
+			{
+
+			}
+
+		};
+
+		cDT.start();
+
+		// countTime( timer );
+		super.onCreate( savedInstanceState );
 		/*
 		 * requestWindowFeature( Window.FEATURE_NO_TITLE );
 		 * getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -78,6 +108,80 @@ public class FeedbackActivity extends Activity
 		// textLName.setVisibility( View.GONE );
 		textPhoneNumber = ( EditText ) findViewById( R.id.et_cellNo );
 		textFeedback = ( EditText ) findViewById( R.id.et_feedback );
+		relativeLayout = ( RelativeLayout ) findViewById( R.id.feedback_relative_layout_parent );
+		sendButton = ( SAutoBgButton ) findViewById( R.id.btn_sendFeedback );
+
+		textFName.setOnFocusChangeListener( new OnFocusChangeListener()
+		{
+			
+			@Override
+			public void onFocusChange( View arg0, boolean hasFocus )
+			{
+			
+				if(hasFocus)
+				{
+					cDT.cancel();
+					cDT.start();
+				}
+				
+			}
+		} );
+		
+		/*textFName.setOnClickListener( new OnClickListener()
+		{
+
+			@Override
+			public void onClick( View arg0 )
+			{
+
+				cDT.cancel();
+				cDT.start();
+			}
+		} );*/
+
+		textPhoneNumber.setOnFocusChangeListener( new OnFocusChangeListener()
+		{
+			
+			@Override
+			public void onFocusChange( View arg0, boolean hasFocus )
+			{
+			
+				if(hasFocus)
+				{
+					cDT.cancel();
+					cDT.start();
+				}
+				
+			}
+		} );
+
+		textFeedback.setOnFocusChangeListener( new OnFocusChangeListener()
+		{
+			
+			@Override
+			public void onFocusChange( View arg0, boolean hasFocus )
+			{
+			
+				if(hasFocus)
+				{
+					cDT.cancel();
+					cDT.start();
+				}
+				
+			}
+		} );
+
+		relativeLayout.setOnClickListener( new OnClickListener()
+		{
+
+			@Override
+			public void onClick( View arg0 )
+			{
+
+				cDT.cancel();
+				cDT.start();
+			}
+		} );
 
 		// homeBtn = ( SAutoBgButton ) findViewById(
 		// R.id.main_menu_cover_homeButton );
@@ -94,7 +198,6 @@ public class FeedbackActivity extends Activity
 		// }
 		// } );
 
-		sendButton = ( SAutoBgButton ) findViewById( R.id.btn_sendFeedback );
 		sendButton.setOnClickListener( new View.OnClickListener()
 		{
 
@@ -102,6 +205,8 @@ public class FeedbackActivity extends Activity
 			public void onClick( View v )
 			{
 
+				cDT.cancel();
+				cDT.start();
 				// TODO Auto-generated method stub
 
 				if( Utils.isNullOrEmpty( textFName.getText().toString() ) || Utils.isNullOrEmpty( textFeedback.getText().toString() ) || Utils.isNullOrEmpty( textPhoneNumber.getText().toString() ) )
@@ -118,8 +223,6 @@ public class FeedbackActivity extends Activity
 					// String isAnonymous = checkBoxIsAnonymous.isChecked() ?
 					// "true" : "false";
 					String feedbackText = Utils.isNullOrEmpty( textFeedback.getText().toString() ) ? "" : textFeedback.getText().toString();
-
-					DatabaseHandler db = new DatabaseHandler( FeedbackActivity.this, AppGlobal.TABLE_FEEDBACK );
 
 					Log.d( "Insert: ", "Inserting .." );
 
@@ -145,6 +248,7 @@ public class FeedbackActivity extends Activity
 					if( AppGlobal.isDebugMode )
 						Toast.makeText( getApplicationContext(), "Reading all Feedbacks..", Toast.LENGTH_LONG ).show();
 					List<FeedbackBO> feedbacks = db.getAllFeedbacks();
+					db.close();
 					for( FeedbackBO feedback : feedbacks )
 					{
 						String log = "Org Id: " + feedback.getOrganizationId() + " ,Name: " + feedback.getFname() + " " + feedback.getLname() + " ,Phone: " + feedback.getTelephone() + " ,Feedback Text: " + feedback.getFeedbackText() + " ,Is Anonymous?: " + feedback.getIsAnonymous();
@@ -163,6 +267,7 @@ public class FeedbackActivity extends Activity
 	{
 
 		super.onResume();
+		db = new DatabaseHandler( FeedbackActivity.this, AppGlobal.TABLE_FEEDBACK );
 		// registerReceiver( internetConnectionFoundBroadCast, new IntentFilter(
 		// AppGlobal.BROADCAST_FILTER_INTERNET_CONNECTION_FOUND ) );
 	}
@@ -173,7 +278,18 @@ public class FeedbackActivity extends Activity
 
 		// TODO Auto-generated method stub
 		super.onPause();
+		if( db != null )
+			db.close();
 		// unregisterReceiver( internetConnectionFoundBroadCast );
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+
+		super.onDestroy();
+		if( db != null )
+			db.close();
 	}
 
 	public void clearFields()
