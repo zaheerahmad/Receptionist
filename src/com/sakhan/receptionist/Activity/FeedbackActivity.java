@@ -41,7 +41,7 @@ public class FeedbackActivity extends Activity
 	private EditText		textPhoneNumber;
 	private EditText		textFeedback;
 	private RelativeLayout	relativeLayout;
-	private long			timer	= 60000;
+	private long			timer	= 20000;
 	CountDownTimer			cDT;
 	DatabaseHandler			db;
 
@@ -113,61 +113,61 @@ public class FeedbackActivity extends Activity
 
 		textFName.setOnFocusChangeListener( new OnFocusChangeListener()
 		{
-			
+
 			@Override
 			public void onFocusChange( View arg0, boolean hasFocus )
 			{
-			
-				if(hasFocus)
+
+				if( hasFocus )
 				{
 					cDT.cancel();
 					cDT.start();
 				}
-				
+
 			}
 		} );
-		
-		/*textFName.setOnClickListener( new OnClickListener()
-		{
 
-			@Override
-			public void onClick( View arg0 )
-			{
-
-				cDT.cancel();
-				cDT.start();
-			}
-		} );*/
+		/*
+		 * textFName.setOnClickListener( new OnClickListener()
+		 * {
+		 * @Override
+		 * public void onClick( View arg0 )
+		 * {
+		 * cDT.cancel();
+		 * cDT.start();
+		 * }
+		 * } );
+		 */
 
 		textPhoneNumber.setOnFocusChangeListener( new OnFocusChangeListener()
 		{
-			
+
 			@Override
 			public void onFocusChange( View arg0, boolean hasFocus )
 			{
-			
-				if(hasFocus)
+
+				if( hasFocus )
 				{
 					cDT.cancel();
 					cDT.start();
 				}
-				
+
 			}
 		} );
 
 		textFeedback.setOnFocusChangeListener( new OnFocusChangeListener()
 		{
-			
+
 			@Override
 			public void onFocusChange( View arg0, boolean hasFocus )
 			{
-			
-				if(hasFocus)
+
+				if( hasFocus )
 				{
 					cDT.cancel();
 					cDT.start();
 				}
-				
+
 			}
 		} );
 
