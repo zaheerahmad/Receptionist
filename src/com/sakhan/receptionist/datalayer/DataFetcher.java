@@ -1,6 +1,7 @@
 package com.sakhan.receptionist.datalayer;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,10 +18,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.sakhan.receptionist.services.DataSendService;
@@ -28,6 +38,7 @@ import com.sakhan.receptionist.utils.AppGlobal;
 import com.sakhan.receptionist.utils.Utils;
 import com.sakhan.receptionist.wrapper.FeedbackAlchemyWrapper;
 import com.sakhan.receptionist.wrapper.IAsyncTask;
+import com.sakhan.receptionist.wrapper.LoginResponseWrapper;
 import com.sakhan.receptionist.wrapper.ResponseStatusWrapper;
 import com.sakhan.receptionist.wrapper.ServerResponseWrapper;
 
@@ -200,7 +211,9 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 						HttpURLConnection httpUrlConnection = ( HttpURLConnection ) url.openConnection();
 						httpUrlConnection.setRequestMethod( "POST" );
 						httpUrlConnection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
-						//httpUrlConnection.setRequestProperty( "Content-Length", "" + Integer.toString( jsonParams.getBytes().length ) );
+						// httpUrlConnection.setRequestProperty(
+						// "Content-Length", "" + Integer.toString(
+						// jsonParams.getBytes().length ) );
 						httpUrlConnection.setRequestProperty( "Content-Language", "en-US" );
 						httpUrlConnection.setUseCaches( false );
 						httpUrlConnection.setDoInput( true );
@@ -254,6 +267,76 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 						}
 					}
 				}
+			}
+			if( params != null && params[0].equalsIgnoreCase( AppGlobal.DATAFETCHER_ACTION_LOGIN ) )
+			{
+				String loginUsername = params[1];
+				String loginPassword = params[2];
+				String IMEI = params[3];
+				String IMSI = params[4];
+
+				String url = AppGlobal.SERVER_URL_LOGIN + "?un=" + loginUsername + "&pwd=" + loginPassword + "&imei=" + IMEI + "&imsi=" + IMSI;
+				ResponseStatusWrapper response = new ResponseStatusWrapper();
+
+				StringBuilder messageFeedBuilder = new StringBuilder();
+				HttpClient httpClient = new DefaultHttpClient();
+				try
+				{
+					// pass search URL string to fetch
+					HttpPost httpPost = new HttpPost( url );
+
+					HttpResponse httpResponse = httpClient.execute( httpPost );
+					// check status, only proceed if ok
+					StatusLine searchStatus = httpResponse.getStatusLine();
+					if( searchStatus.getStatusCode() == 200 )
+					{
+						// get the response
+						HttpEntity messageEntity = httpResponse.getEntity();
+						InputStream messageContent = messageEntity.getContent();
+						// process the results
+						InputStreamReader messageInput = new InputStreamReader( messageContent );
+						BufferedReader messageReader = new BufferedReader( messageInput );
+						String lineIn;
+						while ( ( lineIn = messageReader.readLine() ) != null )
+						{
+							messageFeedBuilder.append( lineIn );
+						}
+					}
+
+					LoginResponseWrapper loginResponseWrapper = new Gson().fromJson( messageFeedBuilder.toString(), LoginResponseWrapper.class );
+					Log.d( "GSON", loginResponseWrapper.getOrganizationAddress() + loginResponseWrapper.getOrganizationContactPerson() );
+
+					if( Utils.isNullOrEmpty( loginResponseWrapper.getOrganizationName() ) )
+					{
+						response.status = AppGlobal.RESPONSE_STATUS_FAIL_INVALID_LOGIN;
+						response.message = AppGlobal.RESPONSE_STATUS_FAIL_INVALID_LOGIN_MESSAGE;
+						return response;
+					}
+					else
+					{
+						SharedPreferences prefs = Utils.getSharedPreferences( context );
+						Editor editor = prefs.edit();
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_ID, loginResponseWrapper.getOrganizationId() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_NAME, loginResponseWrapper.getOrganizationName() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_ADDRESS, loginResponseWrapper.getOrganizationAddress() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_CONTACT_PRESON, loginResponseWrapper.getOrganizationContactPerson() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_TELEPHONE, loginResponseWrapper.getOrganizationTelephone() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_DEVICE_IMEI, loginResponseWrapper.getOrganizationDeviceImei() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_DEVICE_IMSI, loginResponseWrapper.getOrganizationDeviceImsi() );
+						editor.commit();
+					}
+
+				}
+				catch ( Exception e )
+				{
+					response.status = AppGlobal.RESPONSE_STATUS_FAIL;
+					response.message = AppGlobal.RESPONSE_STATUS_FAIL_MESSAGE;
+					return response;
+				}
+
+				response.status = AppGlobal.RESPONSE_STATUS_SUCCESS;
+				response.message = AppGlobal.RESPONSE_STATUS_SUCCESS_MESSAGE;
+				return response;
 			}
 
 		}

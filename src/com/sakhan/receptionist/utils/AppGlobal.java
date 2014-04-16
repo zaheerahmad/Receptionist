@@ -22,6 +22,8 @@ public class AppGlobal
 	public static final int		RESPONSE_STATUS_FAIL_RANDOM_EXCEPTION				= 4;
 	public static final String	RESPONSE_STATUS_FAIL_RANDOM_EXCEPTION_MESSAGE		= "Some random error occured, please try again later!";
 
+	public static final int		RESPONSE_STATUS_FAIL_INVALID_LOGIN					= 5;
+	public static final String	RESPONSE_STATUS_FAIL_INVALID_LOGIN_MESSAGE			= "Please enter correct Username and Password!";
 	/**
 	 * Databases constants
 	 */
@@ -75,6 +77,7 @@ public class AppGlobal
 	public static final String	TOAST_THANKS_FOR_FEEDBACK							= "Thank you for your feedback!";
 	public static final String	TOAST_INTERNET_CONNECTION_FOUND						= "Internet connection on your device found! Uploading your data on server";
 	public static final String	TOAST_DATA_UPLOADED_SUCCESSFULLY					= "Data has been uploaded successfully on server!";
+	public static final String	TOAST_PLEASE_WAIT									= "Please wait...";
 
 	// Constants to figure out whether data needs to be inserted or not..
 	/*
@@ -84,13 +87,14 @@ public class AppGlobal
 
 	// DataFetcher Actions
 	public static final String	DATAFETCHER_ACTION_INSERT_FEEDBACK					= "_insert_feedback_";
+	public static final String	DATAFETCHER_ACTION_LOGIN							= "_login_";
 
 	// Broadcast Filters
 	public static final String	BROADCAST_FILTER_INTERNET_CONNECTION_FOUND			= "_internet_connection_found_";
 
 	// Server URLs
 	public static final String	SERVER_URL_SAVE_FEEDBACK							= "http://www.zaheer.amirhameed.com/webservices/SaveFeedback.php";
-
+	public static final String	SERVER_URL_LOGIN									= "http://zaheer.amirhameed.com/webservices/LoginWebService.php";
 	public static final String	AlchemyAPI_Key										= "3bb77eb7d9347bdd4807989f1e9876de91e2cb67";
 
 	public static final long	SERVICE_DELAY										= 1 * 60 * 1000;
@@ -100,4 +104,13 @@ public class AppGlobal
 	public static final String	APP_PREF_NAME										= "RECEPTIONIST_APP_PREFS";
 	public static final String	APP_PREF_TIMER										= "timer";
 
+	// organization shared preference keys
+	public static final String	APP_PREF_LOGIN_VALID								= "isDeviceValidated";
+	public static final String	APP_PREF_ORGANIZATION_ID							= "organizationId";
+	public static final String	APP_PREF_ORGANIZATION_NAME							= "organizationName";
+	public static final String	APP_PREF_ORGANIZATION_ADDRESS						= "organizationAddress";
+	public static final String	APP_PREF_ORGANIZATION_CONTACT_PRESON				= "organizationContactPerson";
+	public static final String	APP_PREF_ORGANIZATION_TELEPHONE						= "organizationTelephone";
+	public static final String	APP_PREF_ORGANIZATION_DEVICE_IMEI					= "organizationDeviceImei";
+	public static final String	APP_PREF_ORGANIZATION_DEVICE_IMSI					= "organizationDeviceImsi";
 }

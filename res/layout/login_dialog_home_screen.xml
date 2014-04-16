@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:background="@drawable/background_f" >
+
+    <LinearLayout
+        android:id="@+id/login_dialog_linear_layout_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/login_dialog_text_view_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Username"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/login_dialog_edit_text_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/login_dialog_text_view_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Password"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/login_dialog_edit_text_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:inputType="textPassword" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.sakhan.receptionist.utils.SAutoBgButton
+        android:id="@+id/login_dialog_btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_dialog_linear_layout_parent"
+        android:layout_alignRight="@+id/login_dialog_linear_layout_parent"
+        android:layout_below="@+id/login_dialog_linear_layout_parent"
+        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Login"
+        android:textColor="#499DF5" />
+
+</RelativeLayout>

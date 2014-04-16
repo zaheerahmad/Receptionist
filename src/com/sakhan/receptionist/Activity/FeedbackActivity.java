@@ -41,9 +41,11 @@ public class FeedbackActivity extends Activity
 	private EditText		textPhoneNumber;
 	private EditText		textFeedback;
 	private RelativeLayout	relativeLayout;
-	private long			timer	= 20000;
+	private long			timer			= 20000;
 	CountDownTimer			cDT;
 	DatabaseHandler			db;
+	SharedPreferences		prefs			= null;
+	int						organizationId	= -1;
 
 	// private SAutoBgButton homeBtn;
 
@@ -52,6 +54,7 @@ public class FeedbackActivity extends Activity
 	{
 
 		db = new DatabaseHandler( FeedbackActivity.this, AppGlobal.TABLE_FEEDBACK );
+		prefs = Utils.getSharedPreferences( getApplicationContext() );
 
 		cDT = new CountDownTimer( timer, 1000 )
 		{
@@ -228,8 +231,8 @@ public class FeedbackActivity extends Activity
 
 					if( AppGlobal.isDebugMode )
 						Toast.makeText( getApplicationContext(), "Inserting Data in Feedback Table", Toast.LENGTH_LONG ).show();
-
-					FeedbackBO feed = new FeedbackBO( 1, fname, lname, telephone, "false", feedbackText, new SimpleDateFormat( "yyyy:MM:dd HH:mm:ss" ).format( new Date() ) );
+					organizationId = Integer.parseInt( prefs.getString( AppGlobal.APP_PREF_ORGANIZATION_ID, "-1" ) );
+					FeedbackBO feed = new FeedbackBO( organizationId, fname, lname, telephone, "false", feedbackText, new SimpleDateFormat( "yyyy:MM:dd HH:mm:ss" ).format( new Date() ) );
 					db.addFeedback( feed );
 
 					clearFields();
@@ -254,7 +257,6 @@ public class FeedbackActivity extends Activity
 						String log = "Org Id: " + feedback.getOrganizationId() + " ,Name: " + feedback.getFname() + " " + feedback.getLname() + " ,Phone: " + feedback.getTelephone() + " ,Feedback Text: " + feedback.getFeedbackText() + " ,Is Anonymous?: " + feedback.getIsAnonymous();
 						Log.d( "Feedback {" + feedback.getFeedbackId() + "}: ", log );
 					}
-					SharedPreferences prefs = Utils.getSharedPreferences( getApplicationContext() );
 					prefs.edit().putBoolean( AppGlobal.APP_PREF_IS_DATA_DIRTY, true ).commit();
 
 					// AppGlobal.isDataDiry = true;
