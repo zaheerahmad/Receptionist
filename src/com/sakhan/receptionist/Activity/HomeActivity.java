@@ -136,21 +136,15 @@ public class HomeActivity extends Activity
 			public void onClick( View v )
 			{
 
-				dialog.show();
-				/*
-				 * if( !pref.getBoolean( AppGlobal.APP_PREF_LOGIN_VALID, false )
-				 * )
-				 * {
-				 * dialog.show();
-				 * }
-				 * else
-				 * {
-				 * Intent feedbackIntent = new Intent( HomeActivity.this,
-				 * FeedbackActivity.class );
-				 * startActivityForResult( feedbackIntent,
-				 * FEEDBACK_ACTIVITY_REQUEST );
-				 * }
-				 */
+				if( !pref.getBoolean( AppGlobal.APP_PREF_LOGIN_VALID, false ) )
+				{
+					dialog.show();
+				}
+				else
+				{
+					Intent feedbackIntent = new Intent( HomeActivity.this, FeedbackActivity.class );
+					startActivityForResult( feedbackIntent, FEEDBACK_ACTIVITY_REQUEST );
+				}
 
 				// TODO Auto-generated method stub
 				// Intent intent = new Intent( HomeActivity.this,

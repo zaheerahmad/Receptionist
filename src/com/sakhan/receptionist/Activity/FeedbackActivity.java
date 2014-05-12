@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -126,6 +128,83 @@ public class FeedbackActivity extends Activity
 					cDT.cancel();
 					cDT.start();
 				}
+
+			}
+		} );
+
+		textFName.addTextChangedListener( new TextWatcher()
+		{
+
+			public void onTextChanged( CharSequence s, int start, int before, int count )
+			{
+
+				cDT.cancel();
+				cDT.start();
+
+			}
+
+			@Override
+			public void beforeTextChanged( CharSequence s, int start, int count, int after )
+			{
+
+			}
+
+			@Override
+			public void afterTextChanged( Editable arg0 )
+			{
+
+				// TODO Auto-generated method stub
+
+			}
+		} );
+
+		textFeedback.addTextChangedListener( new TextWatcher()
+		{
+
+			public void onTextChanged( CharSequence s, int start, int before, int count )
+			{
+
+				cDT.cancel();
+				cDT.start();
+
+			}
+
+			@Override
+			public void beforeTextChanged( CharSequence s, int start, int count, int after )
+			{
+
+			}
+
+			@Override
+			public void afterTextChanged( Editable arg0 )
+			{
+
+				// TODO Auto-generated method stub
+
+			}
+		} );
+		textPhoneNumber.addTextChangedListener( new TextWatcher()
+		{
+
+			public void onTextChanged( CharSequence s, int start, int before, int count )
+			{
+
+				cDT.cancel();
+				cDT.start();
+
+			}
+
+			@Override
+			public void beforeTextChanged( CharSequence s, int start, int count, int after )
+			{
+
+			}
+
+			@Override
+			public void afterTextChanged( Editable arg0 )
+			{
+
+				// TODO Auto-generated method stub
 
 			}
 		} );
