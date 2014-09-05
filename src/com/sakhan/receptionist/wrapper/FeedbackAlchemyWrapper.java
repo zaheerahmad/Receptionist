@@ -1,10 +1,11 @@
 package com.sakhan.receptionist.wrapper;
 
 import com.sakhan.receptionist.datalayer.FeedbackBO;
+import com.sakhan.receptionist.utils.AppGlobal;
 
 /**
  * @author Zaheer Ahmad
- *
+ * 
  */
 public class FeedbackAlchemyWrapper
 {
@@ -14,6 +15,8 @@ public class FeedbackAlchemyWrapper
 	String		keyword;
 	String		entity;
 	String		concept;
+	String		appVersion; // Adding because I want to send this appVersion to
+							// server.
 
 	/**
 	 * @param feedback
@@ -33,6 +36,7 @@ public class FeedbackAlchemyWrapper
 		this.keyword = keyword;
 		this.entity = entity;
 		this.concept = concept;
+		this.appVersion = AppGlobal.appVersion;
 	}
 
 	/**
@@ -147,6 +151,25 @@ public class FeedbackAlchemyWrapper
 	{
 
 		this.concept = concept;
+	}
+
+	/**
+	 * @return the appVersion
+	 */
+	public String getAppVersion()
+	{
+
+		return appVersion;
+	}
+
+	/**
+	 * @param appVersion
+	 *            the appVersion to set
+	 */
+	public void setAppVersion( String appVersion )
+	{
+
+		this.appVersion = appVersion;
 	}
 
 }

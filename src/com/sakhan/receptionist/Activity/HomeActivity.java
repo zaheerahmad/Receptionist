@@ -1,11 +1,20 @@
 package com.sakhan.receptionist.Activity;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -15,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sakhan.receptionist.datalayer.DataFetcher;
+import com.sakhan.receptionist.services.CheckAppVersionService;
 import com.sakhan.receptionist.utils.AppGlobal;
 import com.sakhan.receptionist.utils.SAutoBgButton;
 import com.sakhan.receptionist.utils.Utils;
@@ -38,8 +48,9 @@ public class HomeActivity extends Activity
 	String				loginUsername				= null;
 	String				loginPassword				= null;
 	String				imeistring					= null;
-	String				imsistring					= null;
+	// String imsistring = null;
 	SharedPreferences	pref						= null;
+	public AlertDialog	myAlertDialog;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -55,6 +66,17 @@ public class HomeActivity extends Activity
 		loginDialogButton = ( SAutoBgButton ) dialog.findViewById( R.id.login_dialog_btnLogin );
 		editTextUsername = ( EditText ) dialog.findViewById( R.id.login_dialog_edit_text_username );
 		editTextPassword = ( EditText ) dialog.findViewById( R.id.login_dialog_edit_text_password );
+
+		final Calendar TIME = Calendar.getInstance();
+		TIME.set( Calendar.MINUTE, 0 );
+		TIME.set( Calendar.SECOND, 0 );
+		TIME.set( Calendar.MILLISECOND, 0 );
+
+		final AlarmManager m = ( AlarmManager ) getApplicationContext().getSystemService( Context.ALARM_SERVICE );
+		final Intent i = new Intent( getApplicationContext(), CheckAppVersionService.class );
+		PendingIntent serviceIntent = PendingIntent.getService( getApplicationContext(), 0, i, PendingIntent.FLAG_CANCEL_CURRENT );
+		m.setRepeating( AlarmManager.RTC, TIME.getTime().getTime(), 2 * 60 * 1000, serviceIntent );
+		// }
 
 		/*
 		 * requestWindowFeature( Window.FEATURE_NO_TITLE );
@@ -72,7 +94,7 @@ public class HomeActivity extends Activity
 		telephonyManager = ( TelephonyManager ) getSystemService( Context.TELEPHONY_SERVICE );
 
 		imeistring = telephonyManager.getDeviceId();
-		imsistring = telephonyManager.getSubscriberId();
+		// imsistring = telephonyManager.getSubscriberId();
 
 		loginDialogButton.setOnClickListener( new OnClickListener()
 		{
@@ -121,7 +143,7 @@ public class HomeActivity extends Activity
 							loadingDialog.show();
 
 						}
-					}, getApplicationContext() ).execute( AppGlobal.DATAFETCHER_ACTION_LOGIN, loginUsername, loginPassword, imeistring, imsistring );
+					}, getApplicationContext() ).execute( AppGlobal.DATAFETCHER_ACTION_LOGIN, loginUsername, loginPassword, imeistring );
 				}
 				else
 					Toast.makeText( getApplicationContext(), "Please enter username or password", Toast.LENGTH_SHORT ).show();
@@ -180,5 +202,64 @@ public class HomeActivity extends Activity
 	{
 
 	}
+
+	protected void onResume()
+	{
+
+		super.onResume();
+		registerReceiver( appVersionUpdatedBroadcastReceiver, new IntentFilter( CheckAppVersionService.INTENT_VERSION_UPDATED ) );
+	}
+
+	@Override
+	protected void onPause()
+	{
+
+		// TODO Auto-generated method stub
+		super.onPause();
+		unregisterReceiver( appVersionUpdatedBroadcastReceiver );
+	}
+
+	private BroadcastReceiver	appVersionUpdatedBroadcastReceiver	= new BroadcastReceiver()
+																	{
+																		@Override
+																		public void onReceive( Context context, Intent intent )
+																		{
+
+																			if( myAlertDialog != null && myAlertDialog.isShowing() )
+																				return;
+
+																			// Toast.makeText(
+																			// getApplicationContext(),
+																			// "App Version Updated",
+																			// Toast.LENGTH_LONG
+																			// ).show();
+																			AlertDialog.Builder builder = new AlertDialog.Builder( HomeActivity.this );
+																			builder.setTitle( "Download Latest Version" ).setMessage( "New version available for this app, Download Now?" );
+																			builder.setPositiveButton( "YES", new DialogInterface.OnClickListener()
+																			{
+
+																				@Override
+																				public void onClick( DialogInterface dialog, int which )
+																				{
+
+																					// TODO
+																					// Auto-generated
+																					// method
+																					// stub
+																					String url = Utils.getLatestBuildUrl( getApplicationContext() );
+																					if( !url.equals( "" ) )
+																					{
+																						Intent i = new Intent( Intent.ACTION_VIEW );
+																						i.setData( Uri.parse( url ) );
+																						startActivity( i );
+																					}
+																				}
+																			} );
+																			builder.setNegativeButton( "NO", null );
+																			builder.setCancelable( false );
+																			myAlertDialog = builder.create();
+																			myAlertDialog.show();
+																		}
+																	};
 
 }

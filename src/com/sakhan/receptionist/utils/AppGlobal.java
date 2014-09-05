@@ -9,6 +9,8 @@ public class AppGlobal
 	public static final boolean	isDebugMode											= false;
 	public static final boolean	shouldMaintainLogOfFeeds							= false;
 
+	public static final String	appVersion											= "2.1";
+
 	// Response Statuses
 	public static final int		RESPONSE_STATUS_FAIL								= 1;
 	public static final String	RESPONSE_STATUS_FAIL_MESSAGE						= "Some error occured while processing request.";
@@ -40,6 +42,7 @@ public class AppGlobal
 	public static final String	TABLE_FEEDBACK										= "tbl_feedback";
 	public static final String	FEEDBACK_ID											= "feedbackId";
 	public static final String	ORGANIZATION_ID										= "organizationId";
+	public static final String	DEVICE_ID											= "deviceId";
 	public static final String	FNAME												= "fname";
 	public static final String	LNAME												= "lname";
 	public static final String	TELEPHONE											= "telephone";
@@ -93,9 +96,10 @@ public class AppGlobal
 	public static final String	BROADCAST_FILTER_INTERNET_CONNECTION_FOUND			= "_internet_connection_found_";
 
 	// Server URLs
-	public static final String	SERVER_URL_SAVE_FEEDBACK							= "http://www.zaheer.amirhameed.com/webservices/SaveFeedback.php";
-	public static final String	SERVER_URL_LOGIN									= "http://zaheer.amirhameed.com/webservices/LoginWebService.php";
+	public static final String	SERVER_URL_SAVE_FEEDBACK							= "http://67.231.22.197/~appdeve1/touchpoint/webservices/SaveFeedback.php";
+	public static final String	SERVER_URL_LOGIN									= "http://67.231.22.197/~appdeve1/touchpoint/webservices/LoginWebService.php";
 	public static final String	AlchemyAPI_Key										= "3bb77eb7d9347bdd4807989f1e9876de91e2cb67";
+	public static final String	URL_APP_VERSION										= "http://67.231.22.197/~appdeve1/touchpoint/GetAppVersion.php";
 
 	public static final long	SERVICE_DELAY										= 1 * 60 * 1000;
 
@@ -113,4 +117,8 @@ public class AppGlobal
 	public static final String	APP_PREF_ORGANIZATION_TELEPHONE						= "organizationTelephone";
 	public static final String	APP_PREF_ORGANIZATION_DEVICE_IMEI					= "organizationDeviceImei";
 	public static final String	APP_PREF_ORGANIZATION_DEVICE_IMSI					= "organizationDeviceImsi";
+	public static final String	APP_PREF_ORGANIZATION_DEVICE_ID						= "organizationDeviceId";
+
+	public static final String	URL_LATEST_BUILD_DIR								= "http://touchpoint.triapptech.com/builds/";
+	public static final String	APP_APK_NAME										= "Touchpoint.apk";
 }

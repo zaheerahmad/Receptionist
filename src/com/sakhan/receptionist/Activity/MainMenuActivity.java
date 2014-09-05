@@ -3,8 +3,13 @@ package com.sakhan.receptionist.Activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -22,9 +27,11 @@ import android.widget.TextView;
 import com.sakhan.receptionist.datalayer.DatabaseHandler;
 import com.sakhan.receptionist.datalayer.FeedbackAlchemyBO;
 import com.sakhan.receptionist.datalayer.FeedbackBO;
+import com.sakhan.receptionist.services.CheckAppVersionService;
 import com.sakhan.receptionist.utils.AppGlobal;
 import com.sakhan.receptionist.utils.ElipsizingTextView;
 import com.sakhan.receptionist.utils.SAutoBgButton;
+import com.sakhan.receptionist.utils.Utils;
 
 /**
  * @author Zaheer Ahmad
@@ -42,6 +49,7 @@ public class MainMenuActivity extends Activity
 	public static FeedbackListAdapter	feedbackAdapter;
 	public static List<FeedbackBO>		listFeedback;
 	private long						timer	= 20000;
+	public AlertDialog					myAlertDialog;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -257,6 +265,17 @@ public class MainMenuActivity extends Activity
 
 		super.onResume();
 		MainMenuActivity.feedbackAdapter.notifyDataSetChanged();
+		registerReceiver( appVersionUpdatedBroadcastReceiver, new IntentFilter( CheckAppVersionService.INTENT_VERSION_UPDATED ) );
+	}
+
+	@Override
+	protected void onPause()
+	{
+
+		// TODO Auto-generated method stub
+		super.onPause();
+		// unregisterReceiver( internetConnectionFoundBroadCast );
+		unregisterReceiver( appVersionUpdatedBroadcastReceiver );
 	}
 
 	@Override
@@ -264,4 +283,47 @@ public class MainMenuActivity extends Activity
 	{
 
 	}
+
+	private BroadcastReceiver	appVersionUpdatedBroadcastReceiver	= new BroadcastReceiver()
+																	{
+																		@Override
+																		public void onReceive( Context context, Intent intent )
+																		{
+
+																			if( myAlertDialog != null && myAlertDialog.isShowing() )
+																				return;
+
+																			// Toast.makeText(
+																			// getApplicationContext(),
+																			// "App Version Updated",
+																			// Toast.LENGTH_LONG
+																			// ).show();
+																			AlertDialog.Builder builder = new AlertDialog.Builder( MainMenuActivity.this );
+																			builder.setTitle( "Download Latest Version" ).setMessage( "New version available for this app, Download Now?" );
+																			builder.setPositiveButton( "YES", new DialogInterface.OnClickListener()
+																			{
+
+																				@Override
+																				public void onClick( DialogInterface dialog, int which )
+																				{
+
+																					// TODO
+																					// Auto-generated
+																					// method
+																					// stub
+																					String url = Utils.getLatestBuildUrl( getApplicationContext() );
+																					if( !url.equals( "" ) )
+																					{
+																						Intent i = new Intent( Intent.ACTION_VIEW );
+																						i.setData( Uri.parse( url ) );
+																						startActivity( i );
+																					}
+																				}
+																			} );
+																			builder.setNegativeButton( "NO", null );
+																			builder.setCancelable( false );
+																			myAlertDialog = builder.create();
+																			myAlertDialog.show();
+																		}
+																	};
 }

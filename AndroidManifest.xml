@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sakhan.receptionist.Activity"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="4"
+    android:versionName="4.1" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -72,6 +72,10 @@
         <service
             android:name="com.sakhan.receptionist.services.DataSendService"
             android:enabled="true" />
+        <service
+            android:name="com.sakhan.receptionist.services.CheckAppVersionService"
+            android:enabled="true" >
+        </service>
     </application>
 
 </manifest>

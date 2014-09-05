@@ -273,9 +273,8 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 				String loginUsername = params[1];
 				String loginPassword = params[2];
 				String IMEI = params[3];
-				String IMSI = params[4];
 
-				String url = AppGlobal.SERVER_URL_LOGIN + "?un=" + loginUsername + "&pwd=" + loginPassword + "&imei=" + IMEI + "&imsi=" + IMSI;
+				String url = AppGlobal.SERVER_URL_LOGIN + "?un=" + loginUsername + "&pwd=" + loginPassword + "&imei=" + IMEI;
 				ResponseStatusWrapper response = new ResponseStatusWrapper();
 
 				StringBuilder messageFeedBuilder = new StringBuilder();
@@ -322,7 +321,7 @@ public class DataFetcher extends AsyncTask<String, String, ResponseStatusWrapper
 						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_CONTACT_PRESON, loginResponseWrapper.getOrganizationContactPerson() );
 						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_TELEPHONE, loginResponseWrapper.getOrganizationTelephone() );
 						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_DEVICE_IMEI, loginResponseWrapper.getOrganizationDeviceImei() );
-						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_DEVICE_IMSI, loginResponseWrapper.getOrganizationDeviceImsi() );
+						editor.putString( AppGlobal.APP_PREF_ORGANIZATION_DEVICE_ID, loginResponseWrapper.getDeviceId() );
 						editor.commit();
 					}
 

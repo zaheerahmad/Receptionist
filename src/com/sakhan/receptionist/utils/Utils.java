@@ -13,6 +13,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -418,5 +420,32 @@ public class Utils
 	{
 
 		return context.getSharedPreferences( AppGlobal.APP_PREF_NAME, Context.MODE_PRIVATE );
+	}
+	
+	public static int getAppVersion( Context context )
+	{
+
+		PackageInfo pInfo;
+		try
+		{
+			pInfo = context.getPackageManager().getPackageInfo( context.getPackageName(), 0 );
+			return pInfo.versionCode;
+		}
+		catch ( NameNotFoundException e )
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static String getLatestBuildUrl( Context context )
+	{
+
+		String appVersion = String.valueOf( getSharedPreferences( context ).getInt( "app_version", -1 ) );
+		if( !appVersion.equals( "-1" ) )
+			return AppGlobal.URL_LATEST_BUILD_DIR + appVersion + "/" + AppGlobal.APP_APK_NAME;
+		else
+			return "";
 	}
 }

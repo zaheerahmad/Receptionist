@@ -27,7 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	public void onCreate( SQLiteDatabase db )
 	{
 
-		String CREATE_FEEDBACK_TABLE = "CREATE TABLE " + AppGlobal.TABLE_FEEDBACK + "(" + AppGlobal.FEEDBACK_ID + " INTEGER PRIMARY KEY," + AppGlobal.ORGANIZATION_ID + " INTEGER," + AppGlobal.FNAME + " TEXT," + AppGlobal.LNAME + " TEXT," + AppGlobal.TELEPHONE + " TEXT," + AppGlobal.IS_ANONYMOUS + " TEXT," + AppGlobal.FEEDBACK_TEXT + " TEXT" + "," + AppGlobal.DATE_TIME + " TEXT" + ")";
+		String CREATE_FEEDBACK_TABLE = "CREATE TABLE " + AppGlobal.TABLE_FEEDBACK + "(" + AppGlobal.FEEDBACK_ID + " INTEGER PRIMARY KEY," + AppGlobal.ORGANIZATION_ID + " INTEGER," + AppGlobal.DEVICE_ID + " INTEGER," + AppGlobal.FNAME + " TEXT," + AppGlobal.LNAME + " TEXT," + AppGlobal.TELEPHONE + " TEXT," + AppGlobal.IS_ANONYMOUS + " TEXT," + AppGlobal.FEEDBACK_TEXT + " TEXT" + "," + AppGlobal.DATE_TIME + " TEXT" + ")";
 		db.execSQL( CREATE_FEEDBACK_TABLE );
 
 		String CREATE_FEEDBACK_ALCHEMY_TABLE = "CREATE TABLE " + AppGlobal.TABLE_FEEDBACK_ALCHEMY + "(" + AppGlobal.ALCHEMY_FEEDBACK_ID + " INTEGER PRIMARY KEY," + AppGlobal.FEEDBACK_ID_FK + " INTEGER," + AppGlobal.ALCHEMY_KEYWORD + " TEXT," + AppGlobal.ALCHEMY_CONCEPT + " TEXT," + AppGlobal.ALCHEMY_ENTITY + " TEXT," + AppGlobal.ALCHEMY_LANGUAGE + " TEXT," + AppGlobal.ALCHEMY_SENTIMENT + " TEXT" + ")";
@@ -60,6 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		ContentValues values = new ContentValues();
 
 		values.put( AppGlobal.ORGANIZATION_ID, feedbackBO.getOrganizationId() );
+		values.put( AppGlobal.DEVICE_ID, feedbackBO.getDeviceId() );
 		values.put( AppGlobal.FNAME, feedbackBO.getFname() );
 		values.put( AppGlobal.LNAME, feedbackBO.getLname() );
 		values.put( AppGlobal.TELEPHONE, feedbackBO.getTelephone() );
@@ -76,11 +77,11 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query( AppGlobal.TABLE_FEEDBACK, new String[] { AppGlobal.FEEDBACK_ID, AppGlobal.ORGANIZATION_ID, AppGlobal.FNAME, AppGlobal.LNAME, AppGlobal.TELEPHONE, AppGlobal.IS_ANONYMOUS, AppGlobal.FEEDBACK_TEXT, AppGlobal.DATE_TIME }, AppGlobal.FEEDBACK_ID + "=?", new String[] { String.valueOf( id ) }, null, null, null, null );
+		Cursor cursor = db.query( AppGlobal.TABLE_FEEDBACK, new String[] { AppGlobal.FEEDBACK_ID, AppGlobal.ORGANIZATION_ID, AppGlobal.DEVICE_ID, AppGlobal.FNAME, AppGlobal.LNAME, AppGlobal.TELEPHONE, AppGlobal.IS_ANONYMOUS, AppGlobal.FEEDBACK_TEXT, AppGlobal.DATE_TIME }, AppGlobal.FEEDBACK_ID + "=?", new String[] { String.valueOf( id ) }, null, null, null, null );
 		if( cursor != null )
 			cursor.moveToFirst();
 
-		FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), cursor.getString( 2 ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ) );
+		FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), Integer.parseInt( cursor.getString( 2 ) ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ), cursor.getString( 8 ) );
 		return feedback;
 	}
 
@@ -97,7 +98,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		{
 			do
 			{
-				FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), cursor.getString( 2 ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ) );
+				FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), Integer.parseInt( cursor.getString( 2 ) ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ), cursor.getString( 8 ) );
 				feedbackList.add( feedback );
 			}
 			while ( cursor.moveToNext() );
@@ -120,7 +121,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		{
 			do
 			{
-				FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), cursor.getString( 2 ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ) );
+				FeedbackBO feedback = new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), Integer.parseInt( cursor.getString( 2 ) ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ), cursor.getString( 8 ) );
 				feedbackList.add( feedback );
 			}
 			while ( cursor.moveToNext() );
@@ -154,7 +155,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		if( cursor != null )
 			cursor.moveToFirst();
 
-		return new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), cursor.getString( 2 ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ) );
+		return new FeedbackBO( Integer.parseInt( cursor.getString( 0 ) ), Integer.parseInt( cursor.getString( 1 ) ), Integer.parseInt( cursor.getString( 2 ) ), cursor.getString( 3 ), cursor.getString( 4 ), cursor.getString( 5 ), cursor.getString( 6 ), cursor.getString( 7 ), cursor.getString( 8 ) );
 	}
 
 	public int updateFeedback( FeedbackBO feedback )

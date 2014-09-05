@@ -8,9 +8,9 @@ public class LoginResponseWrapper
 	private String	organizationContactPerson;
 	private String	organizationTelephone;
 	private String	organizationDeviceImei;
-	private String	organizationDeviceImsi;
+	private String	deviceId;
 
-	public LoginResponseWrapper( String organizationId, String organizationName, String organizationAddress, String organizationContactPerson, String organizationTelephone, String organizationDeviceImei, String organizationDeviceImsi )
+	public LoginResponseWrapper( String organizationId, String organizationName, String organizationAddress, String organizationContactPerson, String organizationTelephone, String organizationDeviceImei, String organizationDeviceImsi, String deviceId )
 	{
 
 		this.organizationId = organizationId;
@@ -19,7 +19,7 @@ public class LoginResponseWrapper
 		this.organizationContactPerson = organizationContactPerson;
 		this.organizationTelephone = organizationTelephone;
 		this.organizationDeviceImei = organizationDeviceImei;
-		this.organizationDeviceImsi = organizationDeviceImsi;
+		this.deviceId = deviceId;
 	}
 
 	public String getOrganizationId()
@@ -94,16 +94,23 @@ public class LoginResponseWrapper
 		this.organizationDeviceImei = organizationDeviceImei;
 	}
 
-	public String getOrganizationDeviceImsi()
+	/**
+	 * @return the deviceId
+	 */
+	public String getDeviceId()
 	{
 
-		return organizationDeviceImsi;
+		return deviceId;
 	}
 
-	public void setOrganizationDeviceImsi( String organizationDeviceImsi )
+	/**
+	 * @param deviceId
+	 *            the deviceId to set
+	 */
+	public void setDeviceId( String deviceId )
 	{
 
-		this.organizationDeviceImsi = organizationDeviceImsi;
+		this.deviceId = deviceId;
 	}
 
 }

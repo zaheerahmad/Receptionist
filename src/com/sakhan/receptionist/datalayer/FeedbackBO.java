@@ -1,14 +1,14 @@
 package com.sakhan.receptionist.datalayer;
 
-
 /**
  * @author Zaheer Ahmad
- *
+ * 
  */
 public class FeedbackBO
 {
 	private int		feedbackId;
 	private int		organizationId;
+	private int		deviceId;
 	private String	fname;
 	private String	lname;
 	private String	telephone;
@@ -17,47 +17,53 @@ public class FeedbackBO
 	private String	dateTime;
 
 	/**
-	 * @param organizationId
-	 * @param fname
-	 * @param lname
-	 * @param telephone
-	 * @param isAnonymous
-	 * @param feedbackText
-	 */
-	public FeedbackBO( int organizationId, String fname, String lname, String telephone, String isAnonymous, String feedbackText, String date )
-	{
-
-		super();
-		this.organizationId = organizationId;
-		this.fname = fname;
-		this.lname = lname;
-		this.telephone = telephone;
-		this.isAnonymous = isAnonymous;
-		this.feedbackText = feedbackText;
-		this.dateTime = date;
-	}
-
-	/**
 	 * @param feedbackId
 	 * @param organizationId
+	 * @param deviceId
 	 * @param fname
 	 * @param lname
 	 * @param telephone
 	 * @param isAnonymous
 	 * @param feedbackText
+	 * @param dateTime
 	 */
-	public FeedbackBO( int feedbackId, int organizationId, String fname, String lname, String telephone, String isAnonymous, String feedbackText, String date )
+	public FeedbackBO( int feedbackId, int organizationId, int deviceId, String fname, String lname, String telephone, String isAnonymous, String feedbackText, String dateTime )
 	{
 
 		super();
 		this.feedbackId = feedbackId;
 		this.organizationId = organizationId;
+		this.deviceId = deviceId;
 		this.fname = fname;
 		this.lname = lname;
 		this.telephone = telephone;
 		this.isAnonymous = isAnonymous;
 		this.feedbackText = feedbackText;
-		this.dateTime = date;
+		this.dateTime = dateTime;
+	}
+
+	/**
+	 * @param organizationId
+	 * @param deviceId
+	 * @param fname
+	 * @param lname
+	 * @param telephone
+	 * @param isAnonymous
+	 * @param feedbackText
+	 * @param dateTime
+	 */
+	public FeedbackBO( int organizationId, int deviceId, String fname, String lname, String telephone, String isAnonymous, String feedbackText, String dateTime )
+	{
+
+		super();
+		this.organizationId = organizationId;
+		this.deviceId = deviceId;
+		this.fname = fname;
+		this.lname = lname;
+		this.telephone = telephone;
+		this.isAnonymous = isAnonymous;
+		this.feedbackText = feedbackText;
+		this.dateTime = dateTime;
 	}
 
 	/**
@@ -96,6 +102,25 @@ public class FeedbackBO
 	{
 
 		this.organizationId = organizationId;
+	}
+
+	/**
+	 * @return the deviceId
+	 */
+	public int getDeviceId()
+	{
+
+		return deviceId;
+	}
+
+	/**
+	 * @param deviceId
+	 *            the deviceId to set
+	 */
+	public void setDeviceId( int deviceId )
+	{
+
+		this.deviceId = deviceId;
 	}
 
 	/**

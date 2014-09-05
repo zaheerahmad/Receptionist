@@ -114,7 +114,7 @@
                         android:background="@drawable/top_edittext_bg"
                         android:hint="Your Mobile Number"
                         android:imeOptions="actionDone"
-                        android:inputType="number"
+                        android:inputType="phone"
                         android:maxLength="25"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
